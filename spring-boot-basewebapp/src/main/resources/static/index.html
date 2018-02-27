@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->                                    
     </head>
-    <body>
+    <body ng-app="app">
         <!-- START PAGE CONTAINER -->
         <div class="page-container">
             
@@ -34,8 +34,8 @@
                             <div class="profile-image">
                                 <img src="assets/images/users/avatar.jpg" alt="John Doe"/>
                             </div>
-                            <div class="profile-data">
-                                <div class="profile-data-name">Dr. Smith</div>
+                            <div class="profile-data" >
+                                <div class="profile-data-name" ng-controller="HelloController">{{message}}</div>
                                 <div class="profile-data-title">Heart Specialist</div>
                             </div>
                             <div class="profile-controls">
@@ -740,9 +740,20 @@
         <script type="text/javascript" src="js/actions.js"></script>
         
         <script type="text/javascript" src="js/demo_dashboard.js"></script>
+        <script
+  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js">
+</script>
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->         
-    </body>
+    <script type="text/javascript">
+    var app = angular.module("app", []);
+    app.controller("HelloController", function($scope) {
+      $scope.message = "Dr. Smith";	
+    });
+    
+    
+    </script>
+        </body>
 </html>
 
 

@@ -1,4 +1,4 @@
-package netgloo;
+package edu.uncc.ssdi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootBasewebappApplication {
 
 	public static void main(String[] args) {
-		System.out.println("HI");
 		SpringApplication.run(SpringBootBasewebappApplication.class, args);
 	}
 }
