@@ -1,9 +1,12 @@
-package hello;
+package edu.uncc.ssdi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+import edu.uncc.ssdi.repositories.UserRepository;
+
+@SpringBootApplication(scanBasePackages={"edu.uncc.ssdi.controllers", "edu.uncc.ssdi.repositories","edu.uncc.ssdi.model"})
 public class SpringBootBasewebappApplication {
 
 	public static void main(String[] args) {
