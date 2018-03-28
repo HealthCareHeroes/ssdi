@@ -1,11 +1,22 @@
 package edu.uncc.ssdi.controllers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThat;
+
 import java.util.List;
 
 import edu.uncc.ssdi.model.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,27 +31,34 @@ import edu.uncc.ssdi.repositories.UserRepository;
 import edu.uncc.ssdi.service.UserService;
 import edu.uncc.ssdi.util.CustomErrorType;
 
-@RestController
-@RequestMapping("/")
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = UserController.class, secure = false)
 public class UserControllerTest {
 
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private TestEntityManager entityManager;
+	
 @Autowired
 private UserRepository userRepository;
-@Autowired
+@MockBean
 private	UserService userService; //Service which will do all data retrieval/manipulation work	
 	
-@RequestMapping(value="/adduser/", method = RequestMethod.POST) // Map ONLY GET Requests
-	public @ResponseBody UserTest addNewUser ( @RequestParam String email , @RequestParam String password) {
+@Test
+public void  addNewUserTest () {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 		
-		System.out.println("Reached");
-		UserTest u = new UserTest();
-		
-		u.setEmail(email);
-		u.setPassword(password);
-		userRepository.save(u);
-		return u;
+	UserTest users = new UserTest();
+	users.setId(1);
+	users.setEmail("sample@uncc.edu");
+	this.entityManager.persist( users );
+	UserTest userTest = this.userRepository.findOne((long) 1);
+	assertThat(userTest.getId()).isEqualTo(1);
+	
+	
 	}
 	
 	
