@@ -22,7 +22,7 @@ import edu.uncc.ssdi.util.CustomErrorType;
 
 @RestController
 @RequestMapping("/")
-public class UserController {
+public class UserControllerTest {
 
 @Autowired
 private UserRepository userRepository;

@@ -4,23 +4,23 @@ package edu.uncc.ssdi.service;
 
 import java.util.List;
 
-import edu.uncc.ssdi.model.User;
+import edu.uncc.ssdi.model.UserTest;
 
 public interface UserService {
 	
-	User findById(Long id);
+	UserTest findById(Long id);
 
-	User findByName(String name);
+	UserTest findByEmail(String name);
 
-	void saveUser(User user);
+	void saveUser(UserTest user);
 
-	void updateUser(User user);
+	void updateUser(UserTest user);
 
 	void deleteUserById(Long id);
 
 	void deleteAllUsers();
 
-	List<User> findAllUsers();
+	List<UserTest> findAllUsers();
 
-	boolean isUserExist(User user);
+	boolean isUserExist(UserTest user);
 }

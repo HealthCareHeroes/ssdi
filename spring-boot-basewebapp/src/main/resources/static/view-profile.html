@@ -14,9 +14,9 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->                  
     </head>
-    <body>
+    <body >
         <!-- START PAGE CONTAINER -->
-        <div class="page-container">
+        <div class="page-container" >
             
             <!-- START PAGE SIDEBAR -->
             <div class="page-sidebar">
@@ -34,8 +34,8 @@
                             <div class="profile-image">
                                 <img src="assets/images/users/avatar.jpg" alt="John Doe"/>
                             </div>
-                            <div class="profile-data">
-                                <div class="profile-data-name">John Doe</div>
+                            <div class="profile-data" >
+                                <div class="profile-data-name"></div>
                                 <div class="profile-data-title">Web Developer/Designer</div>
                             </div>
                             <div class="profile-controls">
@@ -335,7 +335,7 @@
                      <div class="col-md-3"></div>
                                                                                                    
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-primary" type="submit"> <a href="/edit-profile.html">Edit Profile</a></button>
+                                        <button class="btn btn-primary" type="submit" onclick="editable();"> Edit Profile</button>
                                     </div>   
                         <div class="col-md-5">                        
 
@@ -348,14 +348,14 @@
                                    <div class="form-group">
                                         <label class="col-md-3 control-label">E-mail :</label>
                                         <div class="col-md-9">
-                                            <input readonly type="text" value="" name="email" class="form-control"/>                                        
+                                            <input style="font-weight: bold; color: #000000;" id="emailval1" readonly type="text" value="" name="email" class="form-control" />                                        
                                         </div>
                                     </div>
                                     
                                              <div class="form-group">
                                             <label class="col-md-3 control-label">Full Name:</label>
                                             <div class="col-md-9">
-                                                <input readonly type="text" class="form-control" value=""/>
+                                                <input style="font-weight: bold; color: #000000;" id="fullName" readonly type="text" class="form-control" value=""/>
                                             </div>
                                         </div>  
                                     <!--  
@@ -379,7 +379,7 @@
                                   <div class="form-group">                                        
                                         <label class="col-md-3 control-label">Gender :</label>          
                                         <div class="col-md-9">
-                                            <input readonly type="text" class="form-control" name="gender"/>                                        
+                                            <input style="font-weight: bold; color: #000000;" id="gender" readonly type="text" class="form-control" name="gender"/>                                        
                                           
                                         </div>
                                     </div>
@@ -448,7 +448,8 @@
                             </div>
 
                         </div>                                                                                                                         
-                                </div>                                               
+                                </div>                            
+                                <input type="text" id="emailval"/>                   
                                 </form>
                             <!-- END JQUERY VALIDATION PLUGIN -->
                             </div>
@@ -471,7 +472,7 @@
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
                         <p>Are you sure you want to log out?</p>                    
-                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                        <p>Press No if you want to continue work. Press Yes to logout current user.</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
@@ -518,8 +519,60 @@
         <script type="text/javascript" src="js/actions.js"></script>
         <!-- END TEMPLATE -->
         
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" type="text/javascript">
+            
+
+            
+            	
+            	
+           // 	alert("session : "+sessionStorage.getItem("userid"));
+//                 $.ajax({
+//                     url: "http://localhost:8080/user/1"
+//                 }).then(function(data) {
+//                    $('.greeting-id').append(data.id);
+//                    $('.greeting-email').append(data.email);
+//                 });
+
+            
+            
+//     var app = angular.module("app", []);
+//     app.controller("HelloController", function($scope) {
+//     //  $scope.message = "Dr. Smith";	
+//       $scope.message = "Hello";
+
+//     });
+    
+    
+    </script>
+        
+        
         <script type="text/javascript">
-            var jvalidate = $("#jvalidate").validate({
+        
+        function editable(){
+        	
+   	    	document.getElementById("emailval1").readOnly =false;
+   	    	document.getElementById("age").readOnly =false;
+   	    	
+        }
+        
+        $(document).ready(function() {
+        	var session = sessionStorage.getItem("userid");
+        	
+        	var urls = "http://localhost:8080/getUser/"+session
+
+        	alert(urls);
+           	  $.ajax({
+           	        url: urls
+           	    }).then(function(data) {
+           	    	document.getElementById("emailval1").value = data.email;
+
+           	       $('.profile-data-name').append(data.email);
+           	      // $('.greeting-email').append(data.email);
+           	    });
+          
+        });
+        
+        var jvalidate = $("#jvalidate").validate({
                 ignore: [],
                 rules: {                                            
                         login: {
@@ -568,9 +621,4 @@
         
     </body>
 </html>
-
-
-
-
-
 

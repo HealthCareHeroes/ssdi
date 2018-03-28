@@ -748,7 +748,9 @@
     <script type="text/javascript">
     var app = angular.module("app", []);
     app.controller("HelloController", function($scope) {
-      $scope.message = "Dr. Smith";	
+    //  $scope.message = "Dr. Smith";	
+      $scope.message = $window.sessionStorage.getItem("userid");
+
     });
     
     

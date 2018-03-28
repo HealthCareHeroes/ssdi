@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import edu.uncc.ssdi.repositories.UserRepository;
 
-@SpringBootApplication(scanBasePackages={"edu.uncc.ssdi.controllers", "edu.uncc.ssdi.repositories","edu.uncc.ssdi.model"})
+@SpringBootApplication(scanBasePackages={"edu.uncc.ssdi.controllers","edu.uncc.ssdi.service", "edu.uncc.ssdi.repositories","edu.uncc.ssdi.model"})
 public class SpringBootBasewebappApplication {
 
 	public static void main(String[] args) {
