@@ -1,128 +1,88 @@
 package edu.uncc.ssdi.controllers;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import java.util.List;
-
-import edu.uncc.ssdi.model.*;
-
+import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import edu.uncc.ssdi.model.UserTest;
-import edu.uncc.ssdi.repositories.UserRepository;
-import edu.uncc.ssdi.service.UserService;
-import edu.uncc.ssdi.util.CustomErrorType;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/applicationContext.xml")
 @WebMvcTest(value = UserController.class, secure = false)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@Autowired
-	private TestEntityManager entityManager;
+	private WebApplicationContext wac;
 	
-@Autowired
-private UserRepository userRepository;
-@MockBean
-private	UserService userService; //Service which will do all data retrieval/manipulation work	
+ @Before
+ public void setup() {
+	 this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+ }
+ 
+ 
+ @Test
+ public void verifyGetAllUsers() throws Exception{
+	 mockMvc.perform(MockMvcRequestBuilders.get("/getUsers").accept(MediaType.APPLICATION_JSON))
+	 		.andExpect(jsonPath("$", hasSize(15))).andDo(print());
+ }
+ 
+	@Test
+	public void addNewUserTest() throws Exception{
 	
-@Test
-public void  addNewUserTest () {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
-		
-	UserTest users = new UserTest();
-	users.setId(1);
-	users.setEmail("sample@uncc.edu");
-	this.entityManager.persist( users );
-	UserTest userTest = this.userRepository.findOne((long) 1);
-	assertThat(userTest.getId()).isEqualTo(1);
-	
-	
+		mockMvc.perform(MockMvcRequestBuilders.post("/addNewUser/").contentType(MediaType.APPLICATION_JSON)
+				.content("{\"email\" : \"sample@uncc.edu\", \"password\" : \"sample123\" }")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.id").exists())
+				.andExpect(jsonPath("$.email").exists())
+				.andExpect(jsonPath("$.password").exists())
+				.andDo(print());
+				
 	}
-	
-	
-	@RequestMapping(value="/getUsers", method = RequestMethod.GET) // Map ONLY GET Requests
-	public @ResponseBody List<UserTest>  getAllUsers () {
-		
-		return (List<UserTest>) userRepository.findAll();
-		
+
+
+	 @Test
+	public void verifyGetUser() throws Exception{
+		 mockMvc.perform(MockMvcRequestBuilders.get("/getUser/3").accept(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.id").exists())
+			.andExpect(jsonPath("$.email").exists())
+			.andExpect(jsonPath("$.password").exists())
+			.andExpect(jsonPath("$.id").value(3))
+			.andDo(print());
 	}
-	
 
-	@RequestMapping(value="/profile", method = RequestMethod.GET) // Map ONLY GET Requests
-	public ModelAndView  getProfile () {
-		System.out.println("Hello");
-		 ModelAndView mv = new ModelAndView("zindex1");
-	        
-	       // mv.setVie("zindex1");
-	        //mv.getModel().put("data", "Welcome home man");
-			System.out.println(mv.getViewName());
 
-	        return mv;
+	@Test
+	public void verifyUpdateUser() throws Exception{
+
+		mockMvc.perform(MockMvcRequestBuilders.patch("/updateUser/3")
+		        .contentType(MediaType.APPLICATION_JSON)
+		        .content("{ \"id\": \"3\", \"email\" : \"sample@uncc.edu\", \"password\" : \"check123\" }")
+		        .accept(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.id").exists())
+				.andExpect(jsonPath("$.email").exists())
+				.andExpect(jsonPath("$.password").exists())
+				.andExpect(jsonPath("$.id").value(3))
+				.andExpect(jsonPath("$.text").value("sample@uncc.edu"))
+				.andExpect(jsonPath("$.completed").value("check123"))
+				.andDo(print());
 	}
-	
-	@RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserTest>  getUser(@PathVariable("id") Long id) {
-		//long userId=0;
-	 //   userId=Long.parseLong(id);
-	    
-	    /*  
-	    User user1 = new User();
-	    user1.setEmail("anurag@gmail.com");
-*/
-	  
-		UserTest user = userService.findById(id);
-		
-		return new ResponseEntity<UserTest>(user, HttpStatus.OK);
-	}
-	
-	// ------------------- Update a User ------------------------------------------------
 
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UserTest user) {
-		
-		UserTest currentUser = userService.findById(id);
-
-		
-		if (currentUser == null) {
-			return new ResponseEntity<Object>(new CustomErrorType("Unable to upate. User with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
-
-		currentUser.setFirstName(user.getFirstName());
-		currentUser.setLastName(user.getLastName());
-		currentUser.setAddressLine1(user.getAddressLine2());
-		currentUser.setAddressLine1(user.getAddressLine2());
-		currentUser.setDob(user.getDob());
-		currentUser.setEmail(user.getEmail());
-		currentUser.setGender(user.getGender());
-		currentUser.setEmail(user.getEmail());
-		currentUser.setPhone(user.getPhone());
-		currentUser.setPassword(user.getPassword());
-		
-		userService.updateUser(currentUser);
-		return new ResponseEntity<UserTest>(currentUser, HttpStatus.OK);
-	}
-	
 }

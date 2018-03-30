@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.uncc.ssdi.model.UserTest;
+import edu.uncc.ssdi.model.User;
 import edu.uncc.ssdi.repositories.UserRepository;
 import edu.uncc.ssdi.service.UserService;
 import edu.uncc.ssdi.util.CustomErrorType;
@@ -30,61 +30,60 @@ private UserRepository userRepository;
 private	UserService userService; //Service which will do all data retrieval/manipulation work	
 	
 @RequestMapping(value="/adduser/", method = RequestMethod.POST) // Map ONLY GET Requests
-	public @ResponseBody UserTest addNewUser ( @RequestParam String email , @RequestParam String password) {
+	public @ResponseBody User addNewUser ( @RequestParam String email , @RequestParam String password) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 		
 		System.out.println("Reached");
-		UserTest u = new UserTest();
+		User u = new User();
 		
 		u.setEmail(email);
 		u.setPassword(password);
-		userRepository.save(u);
-		return u;
+		User retUser = userRepository.save(u);
+		return retUser;
 	}
 	
 	
+
+@RequestMapping(value="/adduser1/", method = RequestMethod.POST) // Map ONLY GET Requests
+public @ResponseBody User addNewUser1 ( @RequestParam User user) {
+	// @ResponseBody means the returned String is the response, not a view name
+	// @RequestParam means it is a parameter from the GET or POST request
+	
+	System.out.println("Reached");
+	User u = new User();
+	
+	u.setEmail(user.getEmail());
+	u.setPassword(user.getPassword());
+	userRepository.save(u);
+	return u;
+}
+
 	@RequestMapping(value="/getUsers", method = RequestMethod.GET) // Map ONLY GET Requests
-	public @ResponseBody List<UserTest>  getAllUsers () {
+	public @ResponseBody List<User>  getAllUsers () {
 		
-		return (List<UserTest>) userRepository.findAll();
+		return (List<User>) userRepository.findAll();
 		
 	}
 	
-
-	@RequestMapping(value="/profile", method = RequestMethod.GET) // Map ONLY GET Requests
-	public ModelAndView  getProfile () {
-		System.out.println("Hello");
-		 ModelAndView mv = new ModelAndView("zindex1");
-	        
-	       // mv.setVie("zindex1");
-	        //mv.getModel().put("data", "Welcome home man");
-			System.out.println(mv.getViewName());
-
-	        return mv;
-	}
 	
 	@RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserTest>  getUser(@PathVariable("id") Long id) {
-		//long userId=0;
-	 //   userId=Long.parseLong(id);
-	    
-	    /*  
-	    User user1 = new User();
-	    user1.setEmail("anurag@gmail.com");
-*/
+	public ResponseEntity<User>  getUser(@PathVariable("id") Long id) {
+
 	  
-		UserTest user = userService.findById(id);
+		User user = userService.findById(id);
 		
-		return new ResponseEntity<UserTest>(user, HttpStatus.OK);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
-	// ------------------- Update a User ------------------------------------------------
-
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UserTest user) {
+	
+	
+	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
 		
-		UserTest currentUser = userService.findById(id);
+		System.out.println("Reached from UI");
+		
+		User currentUser = userService.findById(id);
 
 		
 		if (currentUser == null) {
@@ -104,7 +103,7 @@ private	UserService userService; //Service which will do all data retrieval/mani
 		currentUser.setPassword(user.getPassword());
 		
 		userService.updateUser(currentUser);
-		return new ResponseEntity<UserTest>(currentUser, HttpStatus.OK);
+		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
 	}
 	
 }

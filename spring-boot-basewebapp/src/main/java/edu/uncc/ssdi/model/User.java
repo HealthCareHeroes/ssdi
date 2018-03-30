@@ -53,7 +53,31 @@ public class User {
 
     private String phone;
     
-    public long getId() {
+    public User() {
+    	super();
+    }
+    
+    public User(long id, String email, String password, String role, String firstName, String lastName, Date dob,
+			String gender, String addressLine1, String addressLine2, String city, String state, String zip,
+			String phone) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.gender = gender;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.phone = phone;
+	}
+
+	public long getId() {
 		return id;
 	}
 
