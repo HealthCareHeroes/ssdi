@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.uncc.ssdi.dao.UserDao;
+import edu.uncc.ssdi.model.Login;
 import edu.uncc.ssdi.model.User;
 import edu.uncc.ssdi.repositories.UserRepository;
 
@@ -17,6 +19,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	
+	@Autowired
+	private UserDao userdao;
 
 	public User findById(Long id) {
 		return userRepository.findOne(id);
@@ -51,6 +57,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findByEmail(String name) {
 		return userRepository.findByEmail(name);
+	}
+
+
+	
+	public User validateUser(Login login) {
+	
+		return userdao.validateUser(login);
+
 	}
 
 

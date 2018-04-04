@@ -510,7 +510,7 @@
 
 								<div class="form-group">
 									<div class="btn-group pull-right">
-										<button hidden ng-click="submit()" class="btn btn-primary"
+										<button hidden ng-click="update()" class="btn btn-primary"
 											type="submit">Update</button>
 									</div>
 								</div>
@@ -658,23 +658,20 @@
 						"userManagerController",
 						function($scope, $http) {
 							$http.defaults.headers.post["Content-Type"] = "application/json";
-
-							$scope.submit = function() {
-
+							$scope.update = function() {
 								var Parameters = {
 									email : $scope.email,
-									password : "",
-									firstName : "",
-									lastName : "",
-									gender : "",
-									age : "",
-									addressLine1 : "",
-									addressLine2 : "",
-									city : "",
-									state : "",
-									phone : ""
-								/*
-										password : $scope.password,
+								    password : $scope.password,
+									firstName : $scope.firstName,
+									lastName : $scope.lastName,
+									gender : $scope.gender,
+									age : $scope.age,
+									addressLine1 : $scope.addressLine1,
+									addressLine2 : $scope.addressLine2,
+									city : $scope.city,
+									state : $scope.state,
+									phone : $scope.phone
+								/*		password : $scope.password,
 										firstName : $scope.fullName,
 										lastName : $scope.fullName,
 										gender : $scope.gender,
@@ -720,7 +717,7 @@
 
 							}
 						});
-
+		// Validation for the client side ********************
 		var jvalidate = $("#jvalidate").validate({
 			ignore : [],
 			rules : {
