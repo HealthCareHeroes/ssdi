@@ -14,7 +14,8 @@ public interface UserService {
 	
 	User findById(Long id);
 
-	User findByEmail(String name);
+	List<User> findByEmail(String email);
+	//List<User> findByFirstName(String firstName);
 
 	void saveUser(User user);
 
@@ -29,4 +30,6 @@ public interface UserService {
 	boolean isUserExist(User user);
 
 	User validateUser(Login login);
+
+	User validateEmail(String email);
 }

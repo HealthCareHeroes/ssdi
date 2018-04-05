@@ -31,20 +31,38 @@
 				<form id="jvalidate" role="form" class="form-horizontal"
 					action="javascript:alert('Form #validate2 submited');">
 					<div class="panel-body">
+						<!-- First Name -->
 						<div class="form-group">
-							<label class="col-md-3 control-label">E-mail:</label>
+							<label class="col-md-3 control-label">First Name:</label>
 							<div class="col-md-9">
-								<input type="text" value="" name="email" ng-model="email"
-									class="form-control" /> <span class="help-block">required
-									field email</span>
+								<input type="text" value="" name="firstName" ng-model="firstName"
+									class="form-control" /> <span class="help-block">required field first name</span>
+							</div>
+						</div>
+						<!-- Last Name -->
+						<div class="form-group">
+							<label class="col-md-3 control-label">Last Name:</label>
+							<div class="col-md-9">
+								<input type="text" value="" name="lastName" ng-model="lastName"
+									class="form-control" /> <span class="help-block">required field</span>
+							</div>
+						</div>
+						<!-- Email -->
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email:</label>
+							<div class="col-md-9">
+								<input type="text" value="" name="email" ng-change="myFunc()" ng-model="email"
+									class="form-control" /> <span class="help-block">required field</span>
+							</div>
+							<div id="errorEmail">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password:</label>
 							<div class="col-md-9">
 								<input type="password" class="form-control" name="password"
-									ng-model="password" id="password2" /> <span class="help-block">min
-									size = 5, max size = 10</span>
+									ng-model="password" id="password2" /> <span class="help-block">
+									min length = 5, max length = 20</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -55,8 +73,7 @@
 									same value as Password</span>
 							</div>
 						</div>
-
-
+						
 						<div class="btn-group pull-right">
 							<button ng-click="submit()" class="btn btn-primary" type="submit">Register</button>
 						</div>
@@ -164,6 +181,33 @@
 						function($scope, $http) {
 							$http.defaults.headers.post["Content-Type"] = "application/json";
 
+							
+							// code added to validate unique email
+							   $scope.myFunc = function() {
+							       
+								   var urls= "http://localhost:8080/checkEmail/"+ $scope.email;
+									alert("url is: "+urls);
+									$.ajax({
+										url :  urls,
+										type : "get"										
+									}).then(function(data) {
+										if(data != null){
+											// provide error message
+											// disable Register button
+										}
+										else
+										    {
+											
+											// make sure register is enabled again
+											}										
+									});
+									
+									
+									
+								   
+							    };
+
+							
 							$scope.submit = function() {
 
 								var Parameters = {
@@ -195,32 +239,36 @@
 		var jvalidate = $("#jvalidate").validate({
 			ignore : [],
 			rules : {
-				login : {
+				/* login : {
 					required : true,
 					minlength : 2,
 					maxlength : 8
-				},
-				password : {
+				}, */
+				firstName : {
 					required : true,
-					minlength : 5,
-					maxlength : 10
+					minlength : 1,
+					maxlength : 50
 				},
-				're-password' : {
+				lastName : {
 					required : true,
-					minlength : 5,
-					maxlength : 10,
-					equalTo : "#password2"
-				},
-				age : {
-					required : true,
-					min : 18,
-					max : 100
+					minlength : 1,
+					maxlength : 50
 				},
 				email : {
 					required : true,
 					email : true
+				},
+				password : {
+					required : true,
+					minlength : 5,
+					maxlength : 20
+				},
+				're-password' : {
+					required : true,
+					minlength : 5,
+					maxlength : 20,
+					equalTo : "#password2"
 				}
-
 			}
 		});
 	</script>
@@ -228,9 +276,3 @@
 	<!-- END SCRIPTS -->
 </body>
 </html>
-
-
-
-
-
-

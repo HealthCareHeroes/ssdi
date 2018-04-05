@@ -16,41 +16,44 @@ public class User {
     private long id;
     
     @NotNull
+    // need to specify that it must be unique
+    @Column(unique=true)
 	private String email;
+    
     @NotNull
     private String password;
     
     @Column(nullable = true)
     private String role;
-    @Column(nullable = true)
-
+    
+    @NotNull
     private String firstName;
-    @Column(nullable = true)
-
+    
+    @NotNull
     private String lastName;
+    
     @Column(nullable = true)
-
     private Date dob;
+    
     @Column(nullable = true)
-
     private String gender;
+    
     @Column(nullable = true)
-
     private String addressLine1;
+    
     @Column(nullable = true)
-
     private String addressLine2;
+    
     @Column(nullable = true)
-
     private String city;
+    
     @Column(nullable = true)
-
 	private String state;
+    
     @Column(nullable = true)
-
     private String zip;
+    
     @Column(nullable = true)
-
     private String phone;
     
     public User() {

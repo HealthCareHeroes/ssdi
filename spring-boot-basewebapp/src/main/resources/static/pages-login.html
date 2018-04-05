@@ -39,7 +39,7 @@
 					<div class="form-group"
 						ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
 						<input type="password" class="form-control" placeholder="Password"
-							name="password" ng-model="password" ng-minLength="8" required />
+							name="password" ng-model="password" ng-minLength="5" ng-maxLength="20" required />
 						<p  class="help-block"
 							ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please
 							Enter at least 8 characters</p>

@@ -1,5 +1,4 @@
 package edu.uncc.ssdi.controllers;
-
 import java.util.List;
 
 import edu.uncc.ssdi.model.*;
@@ -23,7 +22,6 @@ import edu.uncc.ssdi.util.CustomErrorType;
 @RestController
 @RequestMapping("/")
 public class UserController {
-
 @Autowired
 private UserRepository userRepository;
 @Autowired
@@ -33,25 +31,19 @@ private	UserService userService; //Service which will do all data retrieval/mani
 	public @ResponseBody User addNewUser ( @RequestParam String email , @RequestParam String password) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
-		
 		User u = new User();
-		
 		u.setEmail(email);
 		u.setPassword(password);
 		User retUser = userRepository.save(u);
 		return retUser;
 	}
-	
-	
 
 @RequestMapping(value="/adduser1/", method = RequestMethod.POST) // Map ONLY GET Requests
 public @ResponseBody User addNewUser1 ( @RequestParam User user) {
 	// @ResponseBody means the returned String is the response, not a view name
 	// @RequestParam means it is a parameter from the GET or POST request
-	
 	System.out.println("Reached");
 	User u = new User();
-	
 	u.setEmail(user.getEmail());
 	u.setPassword(user.getPassword());
 	userRepository.save(u);
@@ -60,19 +52,33 @@ public @ResponseBody User addNewUser1 ( @RequestParam User user) {
 
 	@RequestMapping(value="/getUsers", method = RequestMethod.GET) // Map ONLY GET Requests
 	public @ResponseBody List<User>  getAllUsers () {
-		
 		return (List<User>) userRepository.findAll();
-		
 	}
-	
 	
 	@RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User>  getUser(@PathVariable("id") Long id) {
-
-	  
 		User user = userService.findById(id);
 		
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/checkEmail/{email:.+}", method = RequestMethod.GET)
+	public ResponseEntity<User>  getUser(@PathVariable("email") String email) {
+		
+		User user= null;
+		  try {
+			//  user =	  userService.validateEmail(email);
+		 user = userService.findByEmail(email).get(0);
+			
+		  }
+		    catch (Exception ex) {
+		      //return "User not found";
+		    }
+		  
+		  
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+		
 	}
 	
 	

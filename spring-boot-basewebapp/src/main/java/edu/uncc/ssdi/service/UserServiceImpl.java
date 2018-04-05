@@ -54,10 +54,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	@Override
-	public User findByEmail(String name) {
-		return userRepository.findByEmail(name);
-	}
+
 
 
 	
@@ -65,6 +62,29 @@ public class UserServiceImpl implements UserService{
 	
 		return userdao.validateUser(login);
 
+	}
+
+
+/*	@Override
+	public List<User> findByFirstName(String firstName) {
+	
+	
+			return userRepository.findByFirstName(firstName);
+		
+		
+	}*/
+
+
+	@Override
+	public List<User> findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+
+	@Override
+	public User validateEmail(String email) {
+		// TODO Auto-generated method stub
+		return userdao.validateEmail(email);
 	}
 
 

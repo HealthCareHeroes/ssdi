@@ -6,4 +6,5 @@ import edu.uncc.ssdi.model.User;
 public interface UserDao {
 
 	User validateUser(Login User);
+	User validateEmail(String email);
 }
