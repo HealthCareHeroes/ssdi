@@ -6,10 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <!-- END META SECTION -->
-
 <!-- CSS INCLUDE -->
 <link rel="stylesheet" type="text/css" id="theme"
 	href="css/theme-default.css" />
@@ -18,15 +16,14 @@
 <body ng-app="userManagerApp">
 	<!-- START PAGE CONTAINER -->
 	<div class="page-container">
-
 		<!-- START PAGE SIDEBAR -->
 		<div class="page-sidebar">
 			<!-- START X-NAVIGATION -->
 			<ul class="x-navigation">
-				<li class="xn-logo"><a href="index.html">Healthify</a> <a
-					href="#" class="x-navigation-control"></a></li>
-				<li class="xn-profile"><a href="#" class="profile-mini"> <img
-						src="assets/images/users/avatar.jpg" alt="John Doe" />
+				<li class="xn-logo"><a href="index.html">Healthify</a>
+				<a href="#" class="x-navigation-control"></a></li>
+				<li class="xn-profile"><a href="#" class="profile-mini">
+				<img src="assets/images/users/avatar.jpg" alt="John Doe" />
 				</a>
 					<div class="profile">
 						<div class="profile-image">
@@ -86,7 +83,6 @@
 								class="fa fa-search"></span> Search</a></li>
 						<li class="xn-openable"><a href="#"><span
 								class="fa fa-file"></span> Blog</a>
-
 							<ul>
 								<li><a href="pages-blog-list.html"><span
 										class="fa fa-copy"></span> List of Posts</a></li>
@@ -218,15 +214,13 @@
 			<!-- END X-NAVIGATION -->
 		</div>
 		<!-- END PAGE SIDEBAR -->
-
 		<!-- PAGE CONTENT -->
 		<div class="page-content">
-
 			<!-- START X-NAVIGATION VERTICAL -->
 			<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
 				<!-- TOGGLE NAVIGATION -->
-				<li class="xn-icon-button"><a href="#"
-					class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+				<li class="xn-icon-button"><a href="#" class="x-navigation-minimize">
+					<span class="fa fa-dedent"></span></a>
 				</li>
 				<!-- END TOGGLE NAVIGATION -->
 				<!-- SEARCH -->
@@ -248,9 +242,7 @@
 					<div
 						class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
 						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="fa fa-comments"></span> Messages
-							</h3>
+							<h3 class="panel-title"><span class="fa fa-comments"></span> Messages</h3>
 							<div class="pull-right">
 								<span class="label label-danger">4 new</span>
 							</div>
@@ -357,7 +349,7 @@
 			<div class="page-content-wrap">
 				<div class="row">
 					<div class="col-md-3"></div>
-					<!-- Implementations of Sprint 1 ************************************************************************************-->
+					<!-- Implementations of Sprint 1 **************************************************-->
 					<div class="btn-group pull-right">
 						<button class="btn btn-primary" type="submit"
 							onclick="editable();">Edit Profile</button>
@@ -395,22 +387,7 @@
 												class="form-control" value="" />
 										</div>
 									</div>
-									<!--  
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Password:</label>                                        
-                                        <div class="col-md-9">
-                                            <input readonly type="password" class="form-control" name="password" id="password2"/>                                        
-                                            <span class="help-block">min size = 5, max size = 10</span>
-                                        </div>
-                                    </div>                    
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Confirm Password:</label>                                       
-                                        <div class="col-md-9">
-                                            <input readonly type="password" class="form-control" name="re-password"/>
-                                            <span class="help-block">required same value as Password</span>
-                                        </div>
-                                    </div>  -->
-                                    <!-- Gender -->
+									<!-- Gender -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Gender:</label>
 										<div class="col-md-9">
@@ -482,7 +459,8 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">Zip Code:</label>
 										<div class="col-md-9">
-											<input id="zip" readonly type="text" class="form-control" value="" ng-model="zip" />
+											<input id="zip" readonly type="text" class="form-control"
+												value="" ng-model="zip" />
 										</div>
 									</div>
 								</div>
@@ -529,45 +507,28 @@
 	<audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
 	<audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
 	<!-- END PRELOADS -->
-
 	<!-- START SCRIPTS -->
 	<!-- START PLUGINS -->
-	<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="js/plugins/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
 	<!-- END PLUGINS -->
-
 	<!-- THIS PAGE PLUGINS -->
-	<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-	<script type="text/javascript"
-		src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-
-	<script type='text/javascript'
-		src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>
-	<script type='text/javascript'
-		src='js/plugins/bootstrap/bootstrap-select.js'></script>
-
-	<script type='text/javascript'
-		src='js/plugins/validationengine/languages/jquery.validationEngine-en.js'></script>
-	<script type='text/javascript'
-		src='js/plugins/validationengine/jquery.validationEngine.js'></script>
-
-	<script type='text/javascript'
-		src='js/plugins/jquery-validation/jquery.validate.js'></script>
-
-	<script type='text/javascript'
-		src='js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+		<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+		<script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+		<script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+		<script type='text/javascript' src='js/plugins/bootstrap/bootstrap-select.js'></script>
+		<script type='text/javascript' src='js/plugins/validationengine/languages/jquery.validationEngine-en.js'></script>
+		<script type='text/javascript' src='js/plugins/validationengine/jquery.validationEngine.js'></script>
+		<script type='text/javascript' src='js/plugins/jquery-validation/jquery.validate.js'></script>
+		<script type='text/javascript' src='js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
 	<!-- END THIS PAGE PLUGINS -->
-
 	<!-- START TEMPLATE -->
-	<script type="text/javascript" src="js/settings.js"></script>
-
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/actions.js"></script>
+		<script type="text/javascript" src="js/settings.js"></script>
+		<script type="text/javascript" src="js/plugins.js"></script>
+		<script type="text/javascript" src="js/actions.js"></script>
 	<!-- END TEMPLATE -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"
 		type="text/javascript">
 		// 	alert("session : "+sessionStorage.getItem("userid"));
 		//                 $.ajax({
@@ -584,9 +545,8 @@
 
 		//     });
 	</script>
-	
 	<script type="text/javascript">
-	// Edit Profile - change fields from read only to editable ************************************
+		// Edit Profile - change fields from read only to editable ************************************
 		function editable() {
 			// Make the elements editable  
 			document.getElementById("emailval1").readOnly = false;
@@ -606,7 +566,6 @@
 			document.getElementById("zip").readOnly = false;
 			document.getElementById("phone").readOnly = false;
 		}
-
 		$(document).ready(function() {
 			var session = sessionStorage.getItem("userid");
 			var urls = "http://localhost:8080/getUser/" + session
@@ -619,7 +578,6 @@
 				$('.profile-data-name').append(data.email);
 			});
 		});
-
 		var app = angular.module("userManagerApp", []);
 		app
 				.controller(
@@ -629,7 +587,7 @@
 							$scope.update = function() {
 								var Parameters = {
 									email : $scope.email,
-								    password : $scope.password,
+									password : $scope.password,
 									firstName : $scope.firstName,
 									lastName : $scope.lastName,
 									gender : $scope.gender,
@@ -639,20 +597,7 @@
 									city : $scope.city,
 									state : $scope.state,
 									phone : $scope.phone
-								/*		password : $scope.password,
-										firstName : $scope.fullName,
-										lastName : $scope.fullName,
-										gender : $scope.gender,
-										age : $scope.age,
-										dob : $scope.dob,
-										addressLine1 : $scope.address1,
-										addressLine2 : $scope.address2,
-										city : $scope.city,
-										state : $scope.state,
-										phone : $scope.phone
-								 */
 								};
-
 								var userid = sessionStorage.getItem("userid");
 								if ($scope.email == null) {
 									//		alert("Fill Mandatory fields");
@@ -698,7 +643,7 @@
 					minlength : 5,
 					maxlength : 20
 				},
-				// TO DO - confirm password does not work yet **************************************************
+				// TO DO - confirm password does not work yet *******************
 				're-password' : {
 					required : true,
 					minlength : 5,
@@ -729,8 +674,6 @@
 			}
 		});
 	</script>
-
 	<!-- END SCRIPTS -->
-
 </body>
 </html>
