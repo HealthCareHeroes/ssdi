@@ -350,6 +350,7 @@
 				<div class="row">
 					<div class="col-md-3"></div>
 					<!-- Implementations of Sprint 1 **************************************************-->
+					<!-- click on edit profile -->
 					<div class="btn-group pull-right">
 						<button class="btn btn-primary" type="submit"
 							onclick="editable();">Edit Profile</button>
@@ -360,45 +361,74 @@
 							<form id="jvalidate" role="form" class="form-horizontal"
 								action="javascript:alert('Form #validate2 submited');">
 								<div class="panel-body">
+								
 									<!-- Email -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Email:</label>
 										<div class="col-md-9">
-											<input style="font-weight: bold; color: #000000;"
-												id="emailval1" readonly type="text" value=""
+											<input style="color: #616161;""
+												id="email" readonly type="text" value=""
 												ng-model="email" name="email" class="form-control" />
+											<span class="help-block">Cannot change</span>
 										</div>
 									</div>
+									
 									<!-- First Name -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">First Name:</label>
 										<div class="col-md-9">
-											<input style="font-weight: bold; color: #000000;"
+											<input style="color: #616161;"
 												id="firstName" readonly type="text" ng-model="firstName"
 												class="form-control" value="" />
+											<span class="help-block">Cannot change</span>
 										</div>
 									</div>
+									
 									<!-- Last Name -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Last Name:</label>
 										<div class="col-md-9">
-											<input style="font-weight: bold; color: #000000;"
+											<input style="color: #616161;"
 												id="lastName" readonly type="text" ng-model="lastName"
+												class="form-control" value="" />
+											<span class="help-block">Cannot change</span>
+										</div>
+									</div>
+									
+																		<!-- Last Name -->
+									<div class="form-group">
+										<label class="col-md-3 control-label">Password</label>
+										<div class="col-md-9">
+											<input style="color: #616161;"
+												id="password" readonly type="text" ng-model="password"
 												class="form-control" value="" />
 										</div>
 									</div>
+									
 									<!-- Gender -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Gender:</label>
-										<div class="col-md-9">
+										<div class="col-md-3">
 											<input id="gender" style="font-weight: bold; color: #000000;"
-												ng-model="gender" readonly type="radio" name="gender"
-												value="male" /> Male <br /> <input id="gender1"
-												style="font-weight: bold; color: #000000;" ng-model="gender"
-												readonly type="radio" name="gender" value="female" />
-											Female
+												ng-model="gender" disabled type="radio" name="gender" value="'male'" /> Male <br /> 
+												
+											<input id="gender1" style="font-weight: bold; color: #000000;" 
+												ng-model="gender" disabled type="radio" name="gender1" value="'female'"/> Female <br />
 										</div>
 									</div>
+									
+									<!-- <div class="form-group">
+                                        <label class="col-md-3 control-label">Gender:</label>
+                                        <div class="col-md-3">
+                                            <select class="validate[required] select" id="gender" disabled>
+                                                <option value="">Choose option</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>                           
+                                            <span class="help-block">Required</span>
+                                        </div>                        
+                                    </div> -->
+									
 									<!-- Age -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Age:</label>
@@ -407,30 +437,34 @@
 												name="age" ng-model="age" />
 										</div>
 									</div>
+									
 									<!-- Date of Birth -->
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="col-md-3 control-label">Date of birth:</label>
 										<div class="col-md-9">
 											<input id="dob" readonly type="text"
 												class="form-control datepicker" name="date" ng-model="dob" />
 										</div>
-									</div>
+									</div> -->
+									
 									<!-- Address 1 -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Address Line 1:</label>
 										<div class="col-md-9">
-											<input id="address1" readonly type="text"
-												class="form-control" name="address1" ng-model="address1" />
+											<input id="addressLine1" readonly type="text"
+												class="form-control" name="addressLine1" ng-model="addressLine1" />
 										</div>
 									</div>
+									
 									<!-- Address 2 -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Address Line 2:</label>
 										<div class="col-md-9">
-											<input id="address2" readonly type="text"
-												class="form-control" name="address2" ng-model="address2" />
+											<input id="addressLine2" readonly type="text"
+												class="form-control" name="addressLine2" ng-model="addressLine2" />
 										</div>
 									</div>
+									
 									<!-- City -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">City:</label>
@@ -439,6 +473,7 @@
 												name="city" ng-model="city" />
 										</div>
 									</div>
+									
 									<!-- State -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">State:</label>
@@ -447,6 +482,7 @@
 												name="state" ng-model="state" />
 										</div>
 									</div>
+									
 									<!-- Phone -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Phone:</label>
@@ -455,6 +491,7 @@
 												class="mask_phone form-control" value="" ng-model="phone" />
 										</div>
 									</div>
+									
 									<!-- Zip Code -->
 									<div class="form-group">
 										<label class="col-md-3 control-label">Zip Code:</label>
@@ -464,12 +501,23 @@
 										</div>
 									</div>
 								</div>
+								
+								<!-- click on update -->
 								<div class="form-group">
 									<div class="btn-group pull-right">
 										<button hidden ng-click="update()" class="btn btn-primary"
 											type="submit">Update</button>
 									</div>
 								</div>
+								
+								<!-- <div class="form-group">
+									<div class="btn-group pull-right">
+										<button class="btn btn-primary" type="submit"
+											onclick="editable();">Edit</button>
+									</div>
+								</div> -->
+					
+					
 							</form>
 							<!-- END JQUERY VALIDATION PLUGIN -->
 						</div>
@@ -503,6 +551,7 @@
 		</div>
 	</div>
 	<!-- END MESSAGE BOX-->
+	
 	<!-- START PRELOADS -->
 	<audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
 	<audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
@@ -528,6 +577,8 @@
 		<script type="text/javascript" src="js/plugins.js"></script>
 		<script type="text/javascript" src="js/actions.js"></script>
 	<!-- END TEMPLATE -->
+	
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"
 		type="text/javascript">
 		// 	alert("session : "+sessionStorage.getItem("userid"));
@@ -545,27 +596,43 @@
 
 		//     });
 	</script>
+	
+	
 	<script type="text/javascript">
 		// Edit Profile - change fields from read only to editable ************************************
 		function editable() {
+			/* window.location
+			.replace("http://localhost:8080/edit-profile.html");
+			 */
 			// Make the elements editable  
-			document.getElementById("emailval1").readOnly = false;
-			document.getElementById("firstName").readOnly = false;
-			document.getElementById("lastName").readOnly = false;
+			//document.getElementById("email").readOnly = true;
+			//document.getElementById("firstName").readOnly = true;
+			//document.getElementById("lastName").readOnly = true;
+			
 			document.getElementById("age").readOnly = false;
+			document.getElementById("password").readOnly = false;
 			// male
-			document.getElementById("gender").readOnly = false;
+			document.getElementById("gender").disabled = false;
 			// female
-			document.getElementById("gender1").readOnly = false;
+			document.getElementById("gender1").disabled = false;
 			// date of birth
-			document.getElementById("dob").readOnly = false;
-			document.getElementById("address1").readOnly = false;
-			document.getElementById("address2").readOnly = false;
+			//document.getElementById("dob").readOnly = false;
+			document.getElementById("addressLine1").readOnly = false;
+			document.getElementById("addressLine2").readOnly = false;
 			document.getElementById("city").readOnly = false;
 			document.getElementById("state").readOnly = false;
 			document.getElementById("zip").readOnly = false;
 			document.getElementById("phone").readOnly = false;
 		}
+		
+	/* 	var genderDisplay;		
+		var gender1 = document.getElementById("gender1").value;
+		if (gender1 != null)
+			 genderDisplay = gender1;			 
+		else genderDisplay = document.getElementById("gender").value; */
+		
+		
+		
 		$(document).ready(function() {
 			var session = sessionStorage.getItem("userid");
 			var urls = "http://localhost:8080/getUser/" + session
@@ -573,43 +640,66 @@
 			$.ajax({
 				url : urls
 			}).then(function(data) {
-				document.getElementById("emailval1").value = data.email;
+				document.getElementById("email").value = data.email;
+				document.getElementById("firstName").value = data.firstName;
+				document.getElementById("lastName").value = data.lastName;
+				document.getElementById("password").value = data.password;
+				document.getElementById("age").value = data.age;
+				//document.getElementById("dob").value = data.dob;
+				document.getElementById("gender").value = data.gender;
+				//document.getElementById("gender1").value = data.gender1;
+				document.getElementById("addressLine1").value = data.addressLine1;
+				document.getElementById("addressLine2").value = data.addressLine2;
+				document.getElementById("city").value = data.city;
+				document.getElementById("state").value = data.state;
+				document.getElementById("phone").value = data.phone;
+				document.getElementById("zip").value = data.zip;
+				
 				// will need to change to name ******************************************************
 				$('.profile-data-name').append(data.email);
+				
 			});
 		});
+		
+		var id = sessionStorage.getItem("userid");
+		
+
+		
 		var app = angular.module("userManagerApp", []);
 		app
 				.controller(
 						"userManagerController",
 						function($scope, $http) {
 							$http.defaults.headers.post["Content-Type"] = "application/json";
-							$scope.update = function() {
+							$scope.update = function(id) {
 								var Parameters = {
-									email : $scope.email,
-									password : $scope.password,
-									firstName : $scope.firstName,
-									lastName : $scope.lastName,
-									gender : $scope.gender,
-									age : $scope.age,
-									addressLine1 : $scope.addressLine1,
-									addressLine2 : $scope.addressLine2,
-									city : $scope.city,
-									state : $scope.state,
-									phone : $scope.phone
+									email : document.getElementById("email").value,
+									password : document.getElementById("password").value,
+									firstName : document.getElementById("firstName").value,
+									lastName : document.getElementById("lastName").value,
+									gender : document.getElementById("gender").value,
+									age : document.getElementById("age").value,
+									addressLine1 : document.getElementById("addressLine1").value,
+									addressLine2 : document.getElementById("addressLine2").value,
+									city : document.getElementById("city").value,
+									state : document.getElementById("state").value,
+									phone : document.getElementById("phone").value,
+									zip : document.getElementById("zip").value
 								};
+								
 								var userid = sessionStorage.getItem("userid");
-								if ($scope.email == null) {
-									//		alert("Fill Mandatory fields");
+								
+								if (userid == null) {
+											alert("Fill Mandatory fields");
 								} else {
-									//	alert("email "+ JSON.stringify(Parameters));
+										alert("email "+ JSON.stringify(Parameters));
 									$
 											.ajax(
 													{
 														url : "http://localhost:8080/updateUser/"
 																+ userid,
 														type : "PUT",
-														data : Parameters,
+														data : JSON.stringify(Parameters),
 														contentType : 'application/json',
 														dataType : "json",
 														processdata : false
@@ -629,6 +719,8 @@
 								}
 							}
 						});
+		
+		
 		// Validation for the client side ********************
 		var jvalidate = $("#jvalidate").validate({
 			ignore : [],
@@ -639,13 +731,13 @@
 					maxlength : 8
 				},
 				password : {
-					required : true,
+					required : false,
 					minlength : 5,
 					maxlength : 20
 				},
 				// TO DO - confirm password does not work yet *******************
 				're-password' : {
-					required : true,
+					required : false,
 					minlength : 5,
 					maxlength : 20,
 					equalTo : "#password2"
