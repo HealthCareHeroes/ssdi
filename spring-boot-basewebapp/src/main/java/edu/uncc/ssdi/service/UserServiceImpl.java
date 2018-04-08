@@ -10,17 +10,18 @@ import edu.uncc.ssdi.dao.UserDao;
 import edu.uncc.ssdi.model.Login;
 import edu.uncc.ssdi.model.User;
 import edu.uncc.ssdi.repositories.UserRepository;
-
-
+import edu.uncc.ssdi.util.DataExistsErrorException;
 
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	
+
+	@Autowired
+	private Systems sysObject;
+
 	@Autowired
 	private UserDao userdao;
 
@@ -28,24 +29,39 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findOne(id);
 	}
 
+	public User saveUser(User user) {
 
-	public void saveUser(User user) {
-		userRepository.save(user);
+		String id = null;
+		try {
+			id = sysObject.generateDigitalProfileKey(user.getId());
+
+			if (findByDigitalId(id).size() > 0)
+				throw new DataExistsErrorException("Digital Id Already exists");
+
+			user.setDigitalId(id);
+			System.out.println("->" + id);
+
+		} catch (DataExistsErrorException e) {
+
+			e.printStackTrace();
+		}
+
+		return userRepository.save(user);
 	}
 
-	public void updateUser(User user){
+	public void updateUser(User user) {
 		saveUser(user);
 	}
 
-	public void deleteUserById(Long id){
+	public void deleteUserById(Long id) {
 		userRepository.delete(id);
 	}
 
-	public void deleteAllUsers(){
+	public void deleteAllUsers() {
 		userRepository.deleteAll();
 	}
 
-	public List<User> findAllUsers(){
+	public List<User> findAllUsers() {
 		return (List<User>) userRepository.findAll();
 	}
 
@@ -53,33 +69,16 @@ public class UserServiceImpl implements UserService{
 		return findByEmail(user.getFirstName()) != null;
 	}
 
-
-
-
-
-	
 	public User validateUser(Login login) {
-	
+
 		return userdao.validateUser(login);
 
 	}
-
-
-/*	@Override
-	public List<User> findByFirstName(String firstName) {
-	
-	
-			return userRepository.findByFirstName(firstName);
-		
-		
-	}*/
-
 
 	@Override
 	public List<User> findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
-
 
 	@Override
 	public User validateEmail(String email) {
@@ -87,7 +86,9 @@ public class UserServiceImpl implements UserService{
 		return userdao.validateEmail(email);
 	}
 
-
-
+	public List<User> findByDigitalId(String name) {
+		// TODO Auto-generated method stub
+		return userRepository.findByDigitalId(name);
+	}
 
 }

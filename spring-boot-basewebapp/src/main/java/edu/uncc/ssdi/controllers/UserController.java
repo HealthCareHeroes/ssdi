@@ -28,13 +28,17 @@ private UserRepository userRepository;
 private	UserService userService; //Service which will do all data retrieval/manipulation work	
 	
 @RequestMapping(value="/adduser/", method = RequestMethod.POST) // Map ONLY GET Requests
-	public @ResponseBody User addNewUser ( @RequestParam String email , @RequestParam String password) {
+	public @ResponseBody User addNewUser ( @RequestParam String email , @RequestParam String password,  @RequestParam String firstName ,  @RequestParam String lastName) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
-		User u = new User();
+	System.out.println("Reached");
+	
+	User u = new User();
 		u.setEmail(email);
 		u.setPassword(password);
-		User retUser = userRepository.save(u);
+		u.setFirstName("Anurag");
+		u.setLastName("lastName");;
+		User retUser = userService.saveUser(u);
 		return retUser;
 	}
 
@@ -52,6 +56,7 @@ public @ResponseBody User addNewUser1 ( @RequestParam User user) {
 
 	@RequestMapping(value="/getUsers", method = RequestMethod.GET) // Map ONLY GET Requests
 	public @ResponseBody List<User>  getAllUsers () {
+	
 		return (List<User>) userRepository.findAll();
 	}
 	

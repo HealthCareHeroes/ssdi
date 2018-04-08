@@ -9,14 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity 
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
     @NotNull
-    // need to specify that it must be unique
     @Column(unique=true)
 	private String email;
     
@@ -55,6 +54,9 @@ public class User {
     
     @Column(nullable = true)
     private String phone;
+    
+    @Column(unique = true)
+    private String digitalId ;
     
     public User() {
     	super();
@@ -192,6 +194,14 @@ public class User {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getDigitalId() {
+		return digitalId;
+	}
+
+	public void setDigitalId(String digitalId) {
+		this.digitalId = digitalId;
 	}
 
 

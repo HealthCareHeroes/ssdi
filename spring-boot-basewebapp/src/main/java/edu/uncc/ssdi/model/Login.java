@@ -1,7 +1,7 @@
 package edu.uncc.ssdi.model;
 
 
-// @Enity --> remove to skip creating tables
+
 public class Login {
    
     private String username;
