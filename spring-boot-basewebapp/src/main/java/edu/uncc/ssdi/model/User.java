@@ -35,6 +35,9 @@ public class User {
     private Date dob;
     
     @Column(nullable = true)
+    private String age;
+    
+    @Column(nullable = true)
     private String gender;
     
     @Column(nullable = true)
@@ -63,7 +66,7 @@ public class User {
     }
     
     public User(long id, String email, String password, String role, String firstName, String lastName, Date dob,
-			String gender, String addressLine1, String addressLine2, String city, String state, String zip,
+			String gender, String age, String addressLine1, String addressLine2, String city, String state, String zip,
 			String phone) {
 		super();
 		this.id = id;
@@ -73,6 +76,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = dob;
+		this.age = age;
 		this.gender = gender;
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
@@ -136,6 +140,15 @@ public class User {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+	
+	
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
 	}
 
 

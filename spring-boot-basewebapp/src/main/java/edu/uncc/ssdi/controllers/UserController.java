@@ -1,6 +1,8 @@
 package edu.uncc.ssdi.controllers;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import edu.uncc.ssdi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,8 +88,8 @@ public @ResponseBody User addNewUser1 ( @RequestParam User user) {
 		
 	}
 	
-	
-	
+
+	//@Transactional
 	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
 		
@@ -103,14 +105,16 @@ public @ResponseBody User addNewUser1 ( @RequestParam User user) {
 
 		currentUser.setFirstName(user.getFirstName());
 		currentUser.setLastName(user.getLastName());
-		currentUser.setAddressLine1(user.getAddressLine2());
-		currentUser.setAddressLine1(user.getAddressLine2());
-		currentUser.setDob(user.getDob());
-		currentUser.setEmail(user.getEmail());
-		currentUser.setGender(user.getGender());
-		currentUser.setEmail(user.getEmail());
-		currentUser.setPhone(user.getPhone());
 		currentUser.setPassword(user.getPassword());
+		currentUser.setAddressLine1(user.getAddressLine1());
+		currentUser.setAddressLine2(user.getAddressLine2());
+		currentUser.setGender(user.getGender());
+		currentUser.setAge(user.getAge());
+		currentUser.setCity(user.getCity());
+		currentUser.setState(user.getState());
+		currentUser.setPhone(user.getPhone());
+		currentUser.setZip(user.getZip());
+
 		
 		userService.updateUser(currentUser);
 		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
